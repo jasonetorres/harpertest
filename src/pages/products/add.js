@@ -9,7 +9,7 @@ import Button from '@components/Button';
 import Form from '@components/Form';
 import FormRow from '@components/FormRow';
 
-export default function Dashboard() {
+export default async function Dashboard() {
   const router = useRouter();
 
   async function handleOnAdd(e) {
@@ -20,6 +20,15 @@ export default function Dashboard() {
       prev[current.name] = current.value;
       return prev;
     }, {});
+  }
+
+  const results = await fetch('/api/products/add', {
+    method: 'POST',
+    body: JSON.stringify(product)
+  }).then(r => r.json())
+
+  if ( results?.data?.id ) {
+    router.push('/');
   }
 
   return (

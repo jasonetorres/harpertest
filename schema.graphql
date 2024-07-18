@@ -1,0 +1,6 @@
+type sneaker @table @export {
+    id: ID @primarykey
+    name: String
+    color: String
+    size: Int
+}
